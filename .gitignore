@@ -1,0 +1,29 @@
+# Python
+backend/venv/
+backend/env/
+backend/__pycache__/
+backend/*.py[cod]
+
+# AI Models (large files, downloaded automatically)
+backend/u2net.onnx
+~/.u2net/
+
+# Next.js
+frontend/.next/
+frontend/out/
+frontend/node_modules/
+
+# Environment variables
+.env
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+
+# Logs
+*.log
