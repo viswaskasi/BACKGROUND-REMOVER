@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { motion, AnimatePresence } from "framer-motion";
@@ -8,36 +6,39 @@ import { toast } from "sonner";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import ComparisonSlider from "@/components/ComparisonSlider";
+import { removeBackground } from "@imgly/background-removal";
 
 export default function ImageUploader() {
     const [originalImageUrl, setOriginalImageUrl] = useState<string | null>(null);
     const [processedImageUrl, setProcessedImageUrl] = useState<string | null>(null);
     const [isUploading, setIsUploading] = useState(false);
+    const [progressMessage, setProgressMessage] = useState("");
 
     const handleUpload = async (fileToUpload: File) => {
         setIsUploading(true);
+        setProgressMessage("Initializing AI Model...");
         try {
-            const formData = new FormData();
-            formData.append("image", fileToUpload);
-
-            const response = await fetch("/api/remove-bg", {
-                method: "POST",
-                body: formData,
+            const resultBlob = await removeBackground(fileToUpload, {
+                progress: (key: string, current: number, total: number) => {
+                    const percent = Math.round((current / total) * 100);
+                    if (key.includes("fetch")) {
+                        setProgressMessage(`Downloading AI Model (${percent}%)`);
+                    } else if (key.includes("compute")) {
+                        setProgressMessage(`Removing Background (${percent}%)`);
+                    } else {
+                        setProgressMessage("AI Processing...");
+                    }
+                }
             });
 
-            if (!response.ok) {
-                throw new Error(await response.text());
-            }
-
-            // The API returns a PNG image blob
-            const resultBlob = await response.blob();
             const processedUrl = URL.createObjectURL(resultBlob);
             setProcessedImageUrl(processedUrl);
         } catch (error) {
             console.error("Failed to remove background:", error);
-            toast.error("Failed to remove background. Please see console.");
+            toast.error("Failed to remove background. Please try again.");
         } finally {
             setIsUploading(false);
+            setProgressMessage("");
         }
     };
 
@@ -129,8 +130,8 @@ export default function ImageUploader() {
                             {isUploading ? (
                                 <div className="flex flex-col items-center text-primary">
                                     <Loader2 className="w-12 h-12 animate-spin mb-4" />
-                                    <p className="font-medium animate-pulse text-lg">AI is Removing Background...</p>
-                                    <p className="text-sm text-muted-foreground mt-2">This usually takes a few seconds</p>
+                                    <p className="font-medium animate-pulse text-lg">{progressMessage}</p>
+                                    <p className="text-sm text-muted-foreground mt-2">Runs 100% privately in your browser</p>
                                 </div>
                             ) : null}
                         </motion.div>

@@ -1,7 +1,8 @@
 import ImageUploader from "@/components/ImageUploader";
 import { Sparkles } from "lucide-react";
+import { Toaster } from "@/components/ui/sonner";
 
-export default function Home() {
+export default function App() {
   return (
     <main className="min-h-screen bg-background text-foreground flex flex-col items-center py-20 px-4 md:px-8">
       <div className="absolute top-0 w-full h-[500px] bg-gradient-to-b from-primary/10 via-background to-background -z-10 pointer-events-none" />
@@ -17,7 +18,7 @@ export default function Home() {
         </h1>
 
         <p className="text-center text-muted-foreground text-lg mb-12 max-w-2xl">
-          Instantly transform your images with our high-performance AI. Whether it&apos;s a product, portrait, or complex object, we&apos;ll isolate it flawlessly in seconds.
+          Instantly transform your images with our high-performance AI. Whether it's a product, portrait, or complex object, we'll isolate it flawlessly in seconds.
         </p>
 
         <ImageUploader />
@@ -27,6 +28,7 @@ export default function Home() {
       <footer className="mt-auto pt-24 pb-4 text-center text-sm text-muted-foreground/60 font-medium tracking-wide">
         Expertly crafted by Viswas
       </footer>
+      <Toaster />
     </main>
   );
 }

@@ -4,9 +4,7 @@
   "description": "Background Remover project root",
   "private": true,
   "scripts": {
-    "dev": "npm --prefix frontend run dev"
-  },
-  "devDependencies": {
-    "vite": "^8.1.1"
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build"
   }
 }
