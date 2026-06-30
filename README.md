@@ -60,10 +60,17 @@ npm install
 
 ### 4. Run the project
 
-**Option A — Use the helper script (Windows)**
+**Option A — Single Command (Recommended)**
+From the project root directory, run:
+```bash
+npm run dev
+```
+This starts both the Next.js frontend and the FastAPI backend concurrently in a single terminal window with unified logs.
+
+**Option B — Helper Script (Windows)**
 Double-click `start-dev.bat` in the root folder.
 
-**Option B — Manual**
+**Option C — Manual (Separate terminals)**
 
 Terminal 1 (Backend):
 ```bash
@@ -96,7 +103,8 @@ BACKGROUND REMOVER/
 │   │   └── components/    # React components
 │   ├── package.json
 │   └── next.config.ts
-└── start-dev.bat          # One-click startup (Windows)
+├── package.json           # Root npm runner configuration
+└── start-dev.bat          # One-click unified startup (Windows)
 ```
 
 ---

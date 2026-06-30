@@ -1,0 +1,9 @@
+{
+  "name": "background-remover-root",
+  "version": "1.0.0",
+  "description": "Background Remover project root",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix frontend run dev"
+  }
+}
