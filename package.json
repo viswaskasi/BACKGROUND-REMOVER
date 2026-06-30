@@ -5,5 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "npm --prefix frontend run dev"
+  },
+  "devDependencies": {
+    "vite": "^8.1.1"
   }
 }
